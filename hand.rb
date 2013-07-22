@@ -5,13 +5,7 @@ class Hand < DelegateClass(Array)
   end
 
   def score
-    picture_cards_normalized = map(&:last).map {|card|
-      if card > 10
-        10
-      else
-        card
-      end
-    }
+    picture_cards_normalized = map {|suite, value| [10, value].min}
 
     number_of_aces = picture_cards_normalized.count {|card| card == 1}
     total = picture_cards_normalized.inject(:+)
