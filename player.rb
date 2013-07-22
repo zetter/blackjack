@@ -1,13 +1,13 @@
 class Player
   def initialize(name)
     @name = name
-    @hand = []
+    @hand = Hand.new([])
   end
 
   def to_s
     @name
   end
-  
+
   def inspect
     @hand.inspect
   end
@@ -15,10 +15,9 @@ class Player
   def <<(card)
     @hand << card
   end
-
-  def points
-    card_values = @hand.map(&:last)
-    Scoring.new(card_values).value
+  
+  def score
+    @hand.score
   end
 
   def hit?
